@@ -1,0 +1,235 @@
+# Voice Recognition System - Quick Reference Guide
+
+## Quick Start (3 Commands)
+
+```bash
+# 1. Navigate to project
+cd "c:\Users\ranji\OneDrive\Desktop\voice based\voice-recognition-system"
+
+# 2. Build and test
+build.bat
+
+# 3. Run application
+mvn exec:java -Dexec.mainClass="com.voicerecognition.ui.VoiceRecognitionApp"
+```
+
+## Essential Commands
+
+### Build & Compile
+```bash
+mvn clean compile      # Compile only
+mvn clean package      # Build JAR
+build.bat              # Automated build (Windows)
+```
+
+### Testing
+```bash
+mvn test                                          # Run all tests
+mvn test -Dtest=ValidationManagerTest            # Run specific test
+mvn test -Dtest=ValidationManagerTest#testValidateMarksValid  # Run specific method
+```
+
+### Running
+```bash
+mvn exec:java -Dexec.mainClass="com.voicerecognition.ui.VoiceRecognitionApp"
+java -jar target/voice-recognition-system-1.0.0.jar
+```
+
+## Project Layout
+
+| Path | Purpose |
+|------|---------|
+| `src/main/java/com/voicerecognition/` | Production code |
+| `src/test/java/com/voicerecognition/` | Test code |
+| `src/main/resources/` | Database schema |
+| `target/` | Build artifacts |
+| `lib/` | Dependencies |
+| `pom.xml` | Maven config |
+
+## Core Classes
+
+| Class | Purpose |
+|-------|---------|
+| `VoiceCommand` | Voice input data model |
+| `IAMarks` | IA marks record |
+| `ValidationManager` | Input validation & parsing |
+| `DatabaseManager` | JDBC & SQLite operations |
+| `AudioRecorder` | Microphone input |
+| `SpeechRecognitionEngine` | Speech processing |
+| `VoiceRecognitionUI` | Main GUI |
+| `RecordsViewFrame` | Records display |
+
+## Key Methods
+
+```java
+// Parsing voice input
+VoiceCommand parseVoiceInput(String text)
+
+// Validation
+ValidationResult validateVoiceCommand(VoiceCommand cmd)
+boolean validateMarks(int marks)
+
+// Database
+void initializeDatabase()
+boolean insertMarks(IAMarks marks)
+List<IAMarks> getAllMarks()
+
+// Audio
+boolean startRecording()
+void stopRecording()
+boolean isMicrophoneAvailable()
+```
+
+## Expected Test Results
+
+```
+Tests run: 9
+Failures: 0
+Errors: 0
+Skipped: 0
+BUILD SUCCESS
+```
+
+## Validation Rules
+
+| Field | Rules |
+|-------|-------|
+| **Marks** | 0 to 20 (inclusive) |
+| **Roll Number** | 1 to 9999 |
+| **Subject** | Non-empty, recognized name |
+
+## Voice Command Examples
+
+```
+"Roll number 25 Subject Operating Systems marks 18"
+"Roll 42 Subject Database Management 15"
+"R.N. 101 Subject: Algorithms Internal: 19"
+```
+
+## Database Tables
+
+### ia_marks
+```
+id (PRIMARY KEY)
+roll_number (NOT NULL)
+subject_name (NOT NULL)
+marks (NOT NULL, 0-20)
+faculty_name
+timestamp (NOT NULL)
+created_date
+updated_date
+```
+
+## Troubleshooting Quick Links
+
+| Issue | Solution |
+|-------|----------|
+| Maven not found | Install from maven.apache.org |
+| Java not found | Install JDK 11+ from oracle.com |
+| Microphone error | Check system audio settings |
+| Database error | Delete .db file and restart |
+| Build fails | Run `mvn clean install` |
+
+## File Locations
+
+| File | Location |
+|------|----------|
+| Main class | `src/main/java/.../VoiceRecognitionApp.java` |
+| Tests | `src/test/java/.../ValidationManagerTest.java` |
+| Database | Auto-created as `voice_recognition_db.db` |
+| Logs | Console output |
+
+## Dependencies
+
+- SQLite JDBC 3.44.0.0
+- JUnit 4.13.2
+- SLF4J 2.0.9
+- Gson 2.10.1
+- JavaSound (built-in)
+
+## Documentation Files
+
+| File | Purpose |
+|------|---------|
+| `README.md` | User guide (2800+ words) |
+| `TRAINING_GUIDE.md` | Setup guide (1500+ words) |
+| `COMPLETION_SUMMARY.md` | Project overview |
+| `DELIVERABLES.txt` | File checklist |
+| `QUICK_REFERENCE.txt` | This file |
+
+## Performance Targets
+
+| Metric | Target |
+|--------|--------|
+| Build time | < 30 seconds |
+| Test time | < 5 seconds |
+| Startup time | < 2 seconds |
+| Memory usage | 50-100 MB |
+| Database ops | < 100ms |
+
+## System Requirements
+
+- Java: 11+
+- Maven: 3.6.0+
+- OS: Windows, Linux, macOS
+- RAM: 512 MB minimum
+- Disk: 500 MB
+- Microphone: Required
+
+## Voice Input Flow
+
+1. Click "Start Recording"
+2. Speak voice command
+3. Click "Stop Recording"
+4. Review recognized data
+5. Correct if needed
+6. Click "Save"
+7. Confirm in database
+
+## Common Voice Patterns
+
+```
+"Roll [number]"
+"Subject [name]"
+"Marks [number]"
+"Internal [number]"
+
+Combinations:
+"Roll 25 Subject Operating Systems marks 18"
+```
+
+## Success Checklist
+
+- ✅ Java installed and in PATH
+- ✅ Maven installed and in PATH
+- ✅ Build completes successfully
+- ✅ All 9 tests pass
+- ✅ Application launches
+- ✅ Microphone works
+- ✅ Database created
+- ✅ Records save successfully
+
+## Next Steps After Training
+
+1. Read `TRAINING_GUIDE.md`
+2. Install Java & Maven
+3. Run `build.bat`
+4. Review `README.md`
+5. Test voice commands
+6. Check database records
+7. Review source code
+8. Submit for evaluation
+
+## Support Resources
+
+- Source code: Well-commented with JavaDoc
+- README.md: Comprehensive user guide
+- TRAINING_GUIDE.md: Setup & troubleshooting
+- pom.xml: Dependency documentation
+- DELIVERABLES.txt: Complete file listing
+
+---
+
+**Quick Ref Version**: 1.0
+**Status**: Ready to Use ✅
+**For Details**: See README.md or TRAINING_GUIDE.md
