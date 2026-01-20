@@ -27,3 +27,5 @@ Manual correction option
 Database storage using JDBC
 
 Simple and attractive HTML UI
+
+https://ranjzz.github.io/voice-based-IA-entry/
